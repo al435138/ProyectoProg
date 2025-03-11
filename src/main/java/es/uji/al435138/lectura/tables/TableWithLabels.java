@@ -1,4 +1,6 @@
-package es.uji.al435138.lectura;
+package es.uji.al435138.lectura.tables;
+
+import es.uji.al435138.lectura.rows.RowWithLabel;
 
 import java.util.HashMap;
 import java.util.Map;

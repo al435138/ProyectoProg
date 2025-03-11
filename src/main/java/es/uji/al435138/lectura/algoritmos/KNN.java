@@ -1,4 +1,8 @@
-package es.uji.al435138.lectura;
+package es.uji.al435138.lectura.algoritmos;
+import es.uji.al435138.lectura.rows.Row;
+import es.uji.al435138.lectura.rows.RowWithLabel;
+import es.uji.al435138.lectura.tables.TableWithLabels;
+
 import java.util.List;
 
 public class KNN {

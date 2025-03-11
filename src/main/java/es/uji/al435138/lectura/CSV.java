@@ -6,8 +6,10 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import es.uji.al435138.lectura.Table;
-import es.uji.al435138.lectura.TableWithLabels;
+
+import es.uji.al435138.lectura.rows.Row;
+import es.uji.al435138.lectura.tables.Table;
+import es.uji.al435138.lectura.tables.TableWithLabels;
 
 
 public class CSV {

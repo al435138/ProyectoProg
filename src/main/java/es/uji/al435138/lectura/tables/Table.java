@@ -1,4 +1,7 @@
-package es.uji.al435138.lectura;
+package es.uji.al435138.lectura.tables;
+
+import es.uji.al435138.lectura.rows.Row;
+import es.uji.al435138.lectura.rows.RowWithLabel;
 
 import java.util.ArrayList;
 import java.util.List;

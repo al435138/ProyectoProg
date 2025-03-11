@@ -1,4 +1,4 @@
-package es.uji.al435138.lectura;
+package es.uji.al435138.lectura.rows;
 
 import java.util.List;
 
