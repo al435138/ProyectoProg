@@ -11,6 +11,8 @@ public class TableWithLabels extends Table {
         this.labelsToIndex = new HashMap<>();
 
     }
+    @Override
+    public RowWithLabel getRowAt (int n) {return (RowWithLabel) super.getRows().get(n);}
 
     @Override
     public void addRow(RowWithLabel row) {
