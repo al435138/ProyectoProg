@@ -2,7 +2,7 @@
 package Pruebas;
 
 // TODO: Reemplazar por los imports de tu proyecto
-import es.uji.al435138.lectura.*;
+import es.uji.scastele.table.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

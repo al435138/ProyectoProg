@@ -2,9 +2,8 @@
 package Pruebas;
 
 // TODO: Reemplazar por los imports de tu proyecto
-import es.uji.al435138.lectura.CSV;
-import es.uji.al435138.lectura.TableWithLabels;
-import es.uji.al435138.lectura.KNN;
+import es.uji.scastele.csv.CSV;
+import es.uji.scastele.table.TableWithLabels;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -25,8 +23,8 @@ class KNNTest {
     private KNN knn;
 
     @BeforeEach
-    void setUp() throws IOException, URISyntaxException {
-        TableWithLabels iris = (TableWithLabels) new CSV().readTableWithLabels("iris.csv");
+    void setUp() throws IOException {
+        TableWithLabels iris = new CSV().readTableWithLabels("iris.csv");
         knn = new KNN();
         knn.train(iris);
     }

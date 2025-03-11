@@ -2,9 +2,9 @@
 package Pruebas;
 
 // TODO: Reemplazar por los imports de tu proyecto
-import es.uji.al435138.lectura.CSV;
-import es.uji.al435138.lectura.Table;
-import es.uji.al435138.lectura.TableWithLabels;
+import es.uji.scastele.csv.CSV;
+import es.uji.scastele.table.Table;
+import es.uji.scastele.table.TableWithLabels;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +35,7 @@ class CSVTest {
     @Test
     @DisplayName("CSV - readTable")
 // TODO: En caso de manejar la excepción en CSV, puedes eliminar la declaración "throws" aquí
-    void readTable() throws IOException, URISyntaxException {
+    void readTable() throws IOException {
         Table table = csv.readTable(milesFile);
 
         // assert that the table is not null
@@ -60,8 +59,8 @@ class CSVTest {
     @Test
     @DisplayName("CSV - readTableWithLabels")
 // TODO: En caso de manejar la excepción en CSV, puedes eliminar la declaración "throws" aquí
-    void readTableWithLabels() throws IOException, URISyntaxException {
-        TableWithLabels table = (TableWithLabels) csv.readTableWithLabels(irisFile);
+    void readTableWithLabels()  throws IOException {
+        TableWithLabels table = csv.readTableWithLabels(irisFile);
 
         // assert that the table is not null
         assertNotNull(table);
