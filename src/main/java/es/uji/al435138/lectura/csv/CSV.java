@@ -1,7 +1,9 @@
 package es.uji.al435138.lectura.csv;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,7 @@ public class CSV {
 
         return tabla;
     }
-    public Table readTableWithLabels (String nFich) throws URISyntaxException {
+    public Table readTableWithLabels (String nFich) throws IOException {
         TableWithLabels table = new TableWithLabels();
         List<String> columnTitles = new ArrayList<>();
 
