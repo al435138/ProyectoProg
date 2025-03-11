@@ -1,4 +1,4 @@
-package es.uji.al435138.lectura;
+package es.uji.al435138.lectura.csv;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import es.uji.al435138.lectura.rows.Row;
-import es.uji.al435138.lectura.tables.Table;
-import es.uji.al435138.lectura.tables.TableWithLabels;
+import es.uji.al435138.lectura.table.Row;
+import es.uji.al435138.lectura.table.Table;
+import es.uji.al435138.lectura.table.TableWithLabels;
 
 
 public class CSV {

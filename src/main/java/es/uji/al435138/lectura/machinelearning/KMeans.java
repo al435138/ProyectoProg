@@ -1,6 +1,6 @@
-package es.uji.al435138.lectura.algoritmos;
+package es.uji.al435138.lectura.machinelearning;
 
-import es.uji.al435138.lectura.tables.Table;
+import es.uji.al435138.lectura.table.Table;
 
 import java.util.List;
 

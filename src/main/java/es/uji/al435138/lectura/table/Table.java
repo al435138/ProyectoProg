@@ -1,14 +1,11 @@
-package es.uji.al435138.lectura.tables;
-
-import es.uji.al435138.lectura.rows.Row;
-import es.uji.al435138.lectura.rows.RowWithLabel;
+package es.uji.al435138.lectura.table;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Table {
     List <String> headers;
-    public List <Row> rows;
+    private List <Row> rows;
     public Table () {
         this.rows = new ArrayList<>();
     }

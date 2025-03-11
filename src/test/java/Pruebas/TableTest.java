@@ -2,8 +2,8 @@
 package Pruebas;
 
 // TODO: Reemplazar por los imports de tu proyecto
-import es.uji.scastele.table.Row;
-import es.uji.scastele.table.Table;
+import es.uji.al435138.lectura.table.Row;
+import es.uji.al435138.lectura.table.Table;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
