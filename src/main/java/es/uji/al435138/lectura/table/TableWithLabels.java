@@ -12,7 +12,9 @@ public class TableWithLabels extends Table {
 
     }
     @Override
-    public RowWithLabel getRowAt (int n) {return (RowWithLabel) super.getRows().get(n);}
+    public RowWithLabel getRowAt (int n) {
+        return (RowWithLabel) super.getRows().get(n);
+    }
 
     @Override
     public void addRow(RowWithLabel row) {
