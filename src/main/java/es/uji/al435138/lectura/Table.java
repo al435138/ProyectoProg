@@ -41,7 +41,9 @@ public class Table {
     }
 
     public int getRowCount () {
-        return rows.size() -1;
+        return rows.size();
     }
 
+    public void addRow(RowWithLabel row) {
+    }
 }
