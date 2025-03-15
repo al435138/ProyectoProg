@@ -15,14 +15,19 @@ import es.uji.al435138.lectura.table.TableWithLabels;
 public class CSV {
     public Table readTable (String nFich) throws IOException {
         Table table = new Table();
+        List<String> columnTitles = new ArrayList<>();
+
         try(BufferedReader br = new BufferedReader(new FileReader(nFich))){
             String line;
             boolean firstLine = true;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 if(firstLine) {
+                    for (String value : values) {
+                        columnTitles.add(value.trim());
+                    }
+                    table.setHeaders(new ArrayList<>(columnTitles));
                     firstLine = false;
-                    continue;
                 }
                 List<Double> rowData = new ArrayList<>();
                 for (int i = 0; i < values.length-1; i++) {
