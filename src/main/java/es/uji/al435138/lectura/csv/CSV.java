@@ -40,7 +40,7 @@ public class CSV {
         return table;
     }
 
-    public Table readTableWithLabels (String nFich) throws IOException {
+    public TableWithLabels readTableWithLabels (String nFich) throws IOException {
         TableWithLabels table = new TableWithLabels();
         List<String> columnTitles = new ArrayList<>();
 

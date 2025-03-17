@@ -14,6 +14,6 @@ public class KMeans {
     }
 
     public Integer estimate(List<Double> sample){
-
+        return 0;
     }
 }
