@@ -45,5 +45,6 @@ public class Table {
     }
 
     public void addRow(RowWithLabel row) {
+        rows.add(row);
     }
 }

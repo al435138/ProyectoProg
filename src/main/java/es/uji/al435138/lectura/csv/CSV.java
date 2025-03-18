@@ -3,6 +3,7 @@ package es.uji.al435138.lectura.csv;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,57 +14,69 @@ import es.uji.al435138.lectura.table.TableWithLabels;
 
 
 public class CSV {
-    public Table readTable (String nFich) throws IOException {
+    public Table readTable(String nFich) throws IOException, URISyntaxException {
         Table table = new Table();
+        String file = getClass().getClassLoader().getResource(nFich).toURI().getPath();
         List<String> columnTitles = new ArrayList<>();
 
-        try(BufferedReader br = new BufferedReader(new FileReader(nFich))){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             boolean firstLine = true;
+
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if(firstLine) {
+
+                if (firstLine) {
+                    // Guardamos los títulos de las columnas
                     for (String value : values) {
                         columnTitles.add(value.trim());
                     }
                     table.setHeaders(new ArrayList<>(columnTitles));
                     firstLine = false;
+                    continue;
                 }
+
                 List<Double> rowData = new ArrayList<>();
-                for (int i = 0; i < values.length-1; i++) {
-                    String value = values[i];
-                    rowData.add(Double.parseDouble(value.trim()));
+                try {
+                    for (int i = 0; i < values.length; i++) {
+                        rowData.add(Double.parseDouble(values[i].trim()));
+                    }
+                    table.addRow(new Row(rowData));
+                } catch (NumberFormatException e) {
+                    System.err.println("Error al convertir a número");
                 }
-                table.addRow(new Row(rowData));
             }
         }
         return table;
     }
 
-    public TableWithLabels readTableWithLabels (String nFich) throws IOException {
+    public TableWithLabels readTableWithLabels(String nFich) throws IOException, URISyntaxException {
         TableWithLabels table = new TableWithLabels();
+        String file = getClass().getClassLoader().getResource(nFich).toURI().getPath();
         List<String> columnTitles = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(nFich))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             boolean firstLine = true;
-            while((line = br.readLine()) != null){
+
+            while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
+
                 if (firstLine) {
                     for (String value : values) {
                         columnTitles.add(value.trim());
                     }
                     table.setHeaders(new ArrayList<>(columnTitles));
                     firstLine = false;
-                } else{
-                    List<Double> rowData = new ArrayList<>();
-                    for (int i = 0; i < values.length - 1; i++) {
-                        String value = values[i];
-                        rowData.add(Double.parseDouble(value.trim()));
-                    }
-                    String label = values[values.length - 1];
-                    table.addRow(new RowWithLabel(rowData, label));
+                    continue;
                 }
+
+                List<Double> rowData = new ArrayList<>();
+                for (int i = 0; i < values.length - 1; i++) {
+                    rowData.add(Double.parseDouble(values[i].trim()));
+                }
+                String label = values[values.length - 1].trim();
+                table.addRow(new RowWithLabel(rowData, label));
             }
         }
         return table;

@@ -12,23 +12,27 @@ public class KNN {
         this.data = data;
     }
 
-    public Integer estimate(List<Double> inputData) {
-        Double minDist = Double.MAX_VALUE;
+    public Integer estimate(List<Double> sample) {
+        double minDist = Double.MAX_VALUE;
         int closestLabel = -1;
 
         for (Row row : data.getRows()) {
             RowWithLabel labelRow = (RowWithLabel) row;
-            Double distance = euclideanDistance(inputData, labelRow.getData());
+            double distance = euclideanDistance(sample, labelRow.getData());
 
             if (distance < minDist) {
                 minDist = distance;
                 closestLabel = Integer.parseInt(labelRow.getLabel());
             }
         }
+
         return closestLabel;
     }
 
     private Double euclideanDistance(List<Double> a, List<Double> b) {
+        if (a.size() != b.size()) {
+            throw new IllegalArgumentException("Las listas deben tener el mismo tamaño");
+        }
         double suma = 0;
         for (int i = 0; i < a.size(); i++) {
             suma += Math.pow(a.get(i) - b.get(i), 2);
