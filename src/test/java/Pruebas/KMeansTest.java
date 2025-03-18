@@ -4,13 +4,19 @@ package Pruebas;
 // TODO: Pon los imports especificos a tu proyecto
 
 import es.uji.al435138.lectura.csv.CSV;
+import es.uji.al435138.lectura.machinelearning.InvalidClusterNumberException;
+import es.uji.al435138.lectura.machinelearning.KMeans;
 import es.uji.al435138.lectura.table.TableWithLabels;
+import es.uji.al435138.lectura.table.Row;
+import es.uji.al435138.lectura.table.RowWithLabel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +32,7 @@ class KMeansTest {
 
     @BeforeEach
     // TODO: En caso de manejar la excepción IOException en CSV, puedes eliminarla aquí
-    void setUp() throws InvalidClusterNumberException, IOException {
+    void setUp() throws IOException, URISyntaxException, InvalidClusterNumberException {
         iris = new CSV().readTableWithLabels("iris.csv");
         kMeans = new KMeans(irisClusters, numIterations, seed);
         kMeans.train(iris);

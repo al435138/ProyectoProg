@@ -38,7 +38,11 @@ public class KMeans {
         return centroids;
     }
 
-    public KMeans(int numClusters, int numIterations, long seed){
+    public KMeans(int numClusters, int numIterations, long seed) throws InvalidClusterNumberException {
+        if (numClusters <= 0){
+            throw new InvalidClusterNumberException("El número de cluster no es correcto");
+
+        }
         this.numClusters = numClusters;
         this.numIterations = numIterations;
         this.seed = seed;
@@ -70,9 +74,9 @@ public class KMeans {
 
             for (int i = 0; i < numClusters; i++) {
                 List<Integer> cluster = clusters.get(i);
-                if (cluster.isEmpty()) continue; // Evitar divisiones por cero si un cluster no tiene puntos
+                if (cluster.isEmpty()) continue;
 
-                // Calculamos el nuevo centroide como el promedio de los puntos del cluster
+                // Calcular nuevo centroide
                 List<Double> newCentroid = new ArrayList<>();
                 for (int j = 0; j < rows.get(0).getData().size(); j++) { // Iterar sobre las columnas
                     double sum = 0;
@@ -90,6 +94,6 @@ public class KMeans {
     }
 
     public Integer estimate(List<Double> sample){
-        return 0;
+        return getClosestCluster(sample);
     }
 }
