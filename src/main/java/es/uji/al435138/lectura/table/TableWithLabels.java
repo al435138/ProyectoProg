@@ -20,7 +20,9 @@ public class TableWithLabels extends Table {
     @Override
     public void addRow(RowWithLabel row) {
         super.addRow(row);
-        labelsToIndex.putIfAbsent(row.getLabel(), labelsToIndex.size());
+        if (!labelsToIndex.containsKey(row.getLabel())) {
+            labelsToIndex.put(row.getLabel(), labelsToIndex.size());
+        }
     }
 
     public int getLabelAsInteger (String label) {

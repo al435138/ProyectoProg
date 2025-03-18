@@ -16,13 +16,15 @@ public class KNN {
         double minDist = Double.MAX_VALUE;
         int closestLabel = -1;
 
+        TableWithLabels labeledData = data; // Asegurar que tenemos acceso a etiquetas
+
         for (Row row : data.getRows()) {
             RowWithLabel labelRow = (RowWithLabel) row;
             double distance = euclideanDistance(sample, labelRow.getData());
 
             if (distance < minDist) {
                 minDist = distance;
-                closestLabel = Integer.parseInt(labelRow.getLabel());
+                closestLabel = labeledData.getLabelAsInteger(labelRow.getLabel()); // Obtener número asociado
             }
         }
 
