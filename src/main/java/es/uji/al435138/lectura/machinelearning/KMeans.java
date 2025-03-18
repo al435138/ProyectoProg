@@ -38,18 +38,20 @@ public class KMeans {
         return centroids;
     }
 
-    public KMeans(int numClusters, int numIterations, long seed) throws InvalidClusterNumberException {
-        if (numClusters <= 0){
-            throw new InvalidClusterNumberException("El número de cluster no es correcto");
+    public KMeans(int numClusters, int numIterations, long seed) {
 
-        }
         this.numClusters = numClusters;
         this.numIterations = numIterations;
         this.seed = seed;
         this.centroids = new ArrayList<>();
     }
 
-    public void train(Table data){
+    public void train(Table data) throws InvalidClusterNumberException {
+
+        if (numClusters <= 0){
+            throw new InvalidClusterNumberException(numClusters);
+        }
+
         Random random = new Random(seed);
 
         //Elegir centroides aleatorios
