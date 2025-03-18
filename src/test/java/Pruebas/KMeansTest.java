@@ -68,7 +68,7 @@ class KMeansTest {
         kMeans = new KMeans(200, numIterations, seed);
         Exception e = assertThrows(InvalidClusterNumberException.class, () -> kMeans.train(iris));
         // TODO: reemplazar getNumRows() con método equivalente, si hace falta
-        System.out.println("Clusters: "+((InvalidClusterNumberException)e).getNumberOfCusters());
-        assertTrue(((InvalidClusterNumberException)e).getNumberOfCusters() > iris.getNumRows());
+        System.out.println("Clusters: "+((InvalidClusterNumberException)e).getNumberOfClusters());
+        assertTrue(((InvalidClusterNumberException)e).getNumberOfClusters() > iris.getRowCount());
     }
 }
