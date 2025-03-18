@@ -63,8 +63,9 @@ public class CSV {
                 String[] values = line.split(",");
 
                 if (firstLine) {
-                    for (String value : values) {
-                        columnTitles.add(value.trim());
+                    // Añadir todas las columnas excepto la última (la etiqueta)
+                    for (int i = 0; i < values.length - 1; i++) {
+                        columnTitles.add(values[i].trim());
                     }
                     table.setHeaders(new ArrayList<>(columnTitles));
                     firstLine = false;
@@ -72,10 +73,10 @@ public class CSV {
                 }
 
                 List<Double> rowData = new ArrayList<>();
-                for (int i = 0; i < values.length - 1; i++) {
+                for (int i = 0; i < values.length - 1; i++) { // Solo datos numéricos
                     rowData.add(Double.parseDouble(values[i].trim()));
                 }
-                String label = values[values.length - 1].trim();
+                String label = values[values.length - 1].trim(); // Última columna = etiqueta
                 table.addRow(new RowWithLabel(rowData, label));
             }
         }
