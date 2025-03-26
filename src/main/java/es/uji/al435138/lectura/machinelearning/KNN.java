@@ -5,29 +5,26 @@ import es.uji.al435138.lectura.table.TableWithLabels;
 
 import java.util.List;
 
-public class KNN {
+public class KNN implements Algorithm<TableWithLabels, List<Double>, Integer> {
     private TableWithLabels data;
 
+    @Override
     public void train(TableWithLabels data) {
         this.data = data;
     }
 
+    @Override
     public Integer estimate(List<Double> sample) {
         double minDist = Double.MAX_VALUE;
         int closestLabel = -1;
-
-        TableWithLabels labeledData = data; // Asegurar que tenemos acceso a etiquetas
-
         for (Row row : data.getRows()) {
             RowWithLabel labelRow = (RowWithLabel) row;
             double distance = euclideanDistance(sample, labelRow.getData());
-
             if (distance < minDist) {
                 minDist = distance;
-                closestLabel = labeledData.getLabelAsInteger(labelRow.getLabel()); // Obtener número asociado
+                closestLabel = data.getLabelAsInteger(labelRow.getLabel());
             }
         }
-
         return closestLabel;
     }
 
@@ -42,3 +39,4 @@ public class KNN {
         return Math.sqrt(suma);
     }
 }
+

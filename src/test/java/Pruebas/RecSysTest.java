@@ -3,6 +3,7 @@ package Pruebas;
 
 // TODO: Pon los imports especificos a tu proyecto
 
+import es.uji.al435138.lectura.machinelearning.Algorithm;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -15,7 +16,6 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.*;
 import es.uji.al435138.lectura.csv.CSV;
 import es.uji.al435138.lectura.machinelearning.KNN;
-import es.uji.al435138.lectura.table.Row;
 import es.uji.al435138.lectura.table.Table;
 
 

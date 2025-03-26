@@ -1,6 +1,6 @@
 package es.uji.al435138.lectura.machinelearning;
 
-public class InvalidClusterNumberException extends Throwable {
+public class InvalidClusterNumberException extends Exception {
     private int numberOfClusters;
 
     public InvalidClusterNumberException(int numberOfClusters) {
