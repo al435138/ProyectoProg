@@ -3,7 +3,7 @@ package Pruebas;
 
 // TODO: Pon los imports especificos a tu proyecto
 
-import es.uji.al435138.lectura.machinelearning.Algorithm;
+import es.uji.al435138.lectura.machinelearning.*;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -15,7 +15,6 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import es.uji.al435138.lectura.csv.CSV;
-import es.uji.al435138.lectura.machinelearning.KNN;
 import es.uji.al435138.lectura.table.Table;
 
 
@@ -48,7 +47,7 @@ class RecSysTest {
 
         @BeforeEach
         // TODO: añadir o eliminar excepciones según tu implementación
-        void setUp() throws IOException, URISyntaxException {
+        void setUp() throws IOException, URISyntaxException, InvalidClusterNumberException {
             trainTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_train.csv");
             testTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_test.csv");
             testItemNames = readNames(songsFolder + separator + "songs_test_names.csv");
@@ -93,7 +92,7 @@ class RecSysTest {
 
         @BeforeEach
         // TODO: añadir o eliminar excepciones según tu implementación
-        void setUp() throws IOException, URISyntaxException {
+        void setUp() throws IOException, URISyntaxException, InvalidClusterNumberException {
             trainTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_train_withoutnames.csv");
             testTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_test_withoutnames.csv");
             testItemNames = readNames(songsFolder + separator + "songs_test_names.csv");
