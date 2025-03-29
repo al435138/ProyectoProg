@@ -4,6 +4,8 @@ package Pruebas;
 // TODO: Pon los imports especificos a tu proyecto
 
 import es.uji.al435138.lectura.machinelearning.*;
+import es.uji.al435138.lectura.recommender.LikedItemNotFoundException;
+import es.uji.al435138.lectura.recommender.RecSys;
 import org.junit.jupiter.api.*;
 
 import java.io.File;

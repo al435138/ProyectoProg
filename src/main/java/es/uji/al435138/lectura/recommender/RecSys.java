@@ -1,5 +1,7 @@
-package es.uji.al435138.lectura.machinelearning;
+package es.uji.al435138.lectura.recommender;
 
+import es.uji.al435138.lectura.machinelearning.Algorithm;
+import es.uji.al435138.lectura.machinelearning.InvalidClusterNumberException;
 import es.uji.al435138.lectura.table.Table;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class RecSys <T extends Table, U, V>{
 
     }
 
-    public void train(Table trainData) throws InvalidClusterNumberException{
+    public void train(Table trainData) throws InvalidClusterNumberException {
 
         algorithm.train((T) trainData);
 

@@ -1,4 +1,4 @@
-package es.uji.al435138.lectura.machinelearning;
+package es.uji.al435138.lectura.recommender;
 
 public class LikedItemNotFoundException extends Throwable {
 }
