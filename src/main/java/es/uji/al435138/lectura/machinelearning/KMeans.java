@@ -22,7 +22,7 @@ public class KMeans implements Algorithm<Table, List<Double>, Integer> {
 
     @Override
     public void train(Table data) throws InvalidClusterNumberException {
-        if (numClusters <= 0) {
+        if (numClusters <= 0 || numClusters > data.getRows().size()) {
             throw new InvalidClusterNumberException(numClusters);
         }
 
