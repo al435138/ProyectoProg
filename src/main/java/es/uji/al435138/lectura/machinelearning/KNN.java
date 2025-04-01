@@ -7,10 +7,12 @@ import java.util.List;
 
 public class KNN implements Algorithm<TableWithLabels, List<Double>, Integer> {
     private TableWithLabels data;
+    private Distance distance;
 
     @Override
     public void train(TableWithLabels data) {
         this.data = data;
+        this.distance = distance;
     }
 
     @Override
@@ -19,7 +21,7 @@ public class KNN implements Algorithm<TableWithLabels, List<Double>, Integer> {
         int closestLabel = -1;
         for (Row row : data.getRows()) {
             RowWithLabel labelRow = (RowWithLabel) row;
-            double distance = euclideanDistance(sample, labelRow.getData());
+            double distance = calculateDistance(sample, labelRow.getData());
             if (distance < minDist) {
                 minDist = distance;
                 closestLabel = data.getLabelAsInteger(labelRow.getLabel());
@@ -28,7 +30,7 @@ public class KNN implements Algorithm<TableWithLabels, List<Double>, Integer> {
         return closestLabel;
     }
 
-    private Double euclideanDistance(List<Double> a, List<Double> b) {
+    private Double calculateDistance(List<Double> a, List<Double> b) {
         if (a.size() != b.size()) {
             throw new IllegalArgumentException("Las listas deben tener el mismo tamaño");
         }
