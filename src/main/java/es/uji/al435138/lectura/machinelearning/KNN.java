@@ -9,6 +9,8 @@ public class KNN implements Algorithm<TableWithLabels, List<Double>, Integer> {
     private TableWithLabels data;
     private Distance distance;
 
+    public KNN() {}
+
     public KNN(Distance distance) {
         this.distance = distance;
     }
