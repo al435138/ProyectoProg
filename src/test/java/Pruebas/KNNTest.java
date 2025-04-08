@@ -3,6 +3,7 @@ package Pruebas;
 
 // TODO: Reemplazar por los imports de tu proyecto
 import es.uji.al435138.lectura.csv.CSV;
+import es.uji.al435138.lectura.machinelearning.Distance;
 import es.uji.al435138.lectura.machinelearning.KNN;
 import es.uji.al435138.lectura.table.TableWithLabels;
 
@@ -23,11 +24,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class KNNTest {
 
     private KNN knn;
+    private Distance distance;
 
     @BeforeEach
     void setUp() throws IOException, URISyntaxException {
         TableWithLabels iris = new CSV().readTableWithLabels("iris.csv");
-        knn = new KNN();
+        knn = new KNN(distance);
         knn.train(iris);
     }
 

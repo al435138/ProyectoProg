@@ -14,12 +14,12 @@ public class KMeans implements Algorithm<Table, List<Double>, Integer> {
     private List<List<Double>> centroids;
     private Distance distance;
 
-    public KMeans(int numClusters, int numIterations, long seed) {
+    public KMeans(int numClusters, int numIterations, long seed, Distance distancia) {
         this.numClusters = numClusters;
         this.numIterations = numIterations;
         this.seed = seed;
         this.centroids = new ArrayList<>();
-        this.distance = distance;
+        this.distance = distancia;
     }
 
     @Override
@@ -81,10 +81,7 @@ public class KMeans implements Algorithm<Table, List<Double>, Integer> {
     }
 
     private double calculateDistance(List<Double> a, List<Double> b) {
-        double suma = 0;
-        for (int i = 0; i < a.size(); i++) {
-            suma += Math.pow(a.get(i) - b.get(i), 2);
-        }
-        return Math.sqrt(suma);
+        double distancia = distance.calculateDistance(a, b);
+        return distancia;
     }
 }

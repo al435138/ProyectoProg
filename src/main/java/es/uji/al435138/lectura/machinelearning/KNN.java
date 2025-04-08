@@ -9,10 +9,13 @@ public class KNN implements Algorithm<TableWithLabels, List<Double>, Integer> {
     private TableWithLabels data;
     private Distance distance;
 
+    public KNN(Distance distance) {
+        this.distance = distance;
+    }
+
     @Override
     public void train(TableWithLabels data) {
         this.data = data;
-        this.distance = distance;
     }
 
     @Override
@@ -31,14 +34,8 @@ public class KNN implements Algorithm<TableWithLabels, List<Double>, Integer> {
     }
 
     private Double calculateDistance(List<Double> a, List<Double> b) {
-        if (a.size() != b.size()) {
-            throw new IllegalArgumentException("Las listas deben tener el mismo tamaño");
-        }
-        double suma = 0;
-        for (int i = 0; i < a.size(); i++) {
-            suma += Math.pow(a.get(i) - b.get(i), 2);
-        }
-        return Math.sqrt(suma);
+        double distancia = distance.calculateDistance(a, b);
+        return distancia;
     }
 }
 
