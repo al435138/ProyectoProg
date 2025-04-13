@@ -3,12 +3,12 @@ package Pruebas;
 
 // TODO: Pon los imports especificos a tu proyecto
 
-import es.uji.al435138.lectura.csv.CSV;
-import es.uji.al435138.lectura.machinelearning.Distance;
-import es.uji.al435138.lectura.machinelearning.EuclideanDistance;
-import es.uji.al435138.lectura.machinelearning.InvalidClusterNumberException;
-import es.uji.al435138.lectura.machinelearning.KMeans;
-import es.uji.al435138.lectura.table.TableWithLabels;
+import es.uji.al435138.csv.CSV;
+import es.uji.al435138.machinelearning.Distance;
+import es.uji.al435138.machinelearning.EuclideanDistance;
+import es.uji.al435138.machinelearning.InvalidClusterNumberException;
+import es.uji.al435138.machinelearning.KMeans;
+import es.uji.al435138.table.TableWithLabels;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

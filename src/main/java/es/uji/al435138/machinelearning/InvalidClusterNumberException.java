@@ -1,4 +1,4 @@
-package es.uji.al435138.lectura.machinelearning;
+package es.uji.al435138.machinelearning;
 
 public class InvalidClusterNumberException extends Exception {
     private int numberOfClusters;

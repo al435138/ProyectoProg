@@ -1,8 +1,5 @@
-package es.uji.al435138.lectura.csv;
+package es.uji.al435138.csv;
 
-import es.uji.al435138.lectura.table.Table;
-
-import java.io.Reader;
 import java.util.Scanner;
 
 public abstract class ReaderTemplate <T> {

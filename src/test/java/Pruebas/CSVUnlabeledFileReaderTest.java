@@ -2,8 +2,8 @@ package Pruebas;// TODO: Remplazar <nombre> por el nombre de tu paquete
 
 // TODO: Pon los imports especificos a tu proyecto
 
-import es.uji.al435138.lectura.csv.CSVUnlabeledFileReader;
-import es.uji.al435138.lectura.table.Table;
+import es.uji.al435138.csv.CSVUnlabeledFileReader;
+import es.uji.al435138.table.Table;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

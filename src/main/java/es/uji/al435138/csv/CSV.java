@@ -1,4 +1,4 @@
-package es.uji.al435138.lectura.csv;
+package es.uji.al435138.csv;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,10 +7,10 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.uji.al435138.lectura.table.Row;
-import es.uji.al435138.lectura.table.RowWithLabel;
-import es.uji.al435138.lectura.table.Table;
-import es.uji.al435138.lectura.table.TableWithLabels;
+import es.uji.al435138.table.Row;
+import es.uji.al435138.table.RowWithLabel;
+import es.uji.al435138.table.Table;
+import es.uji.al435138.table.TableWithLabels;
 
 
 public class CSV {

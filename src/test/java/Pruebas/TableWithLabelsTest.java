@@ -2,8 +2,9 @@
 package Pruebas;
 
 // TODO: Reemplazar por los imports de tu proyecto
-import es.uji.al435138.lectura.table.*;
 
+import es.uji.al435138.table.RowWithLabel;
+import es.uji.al435138.table.TableWithLabels;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

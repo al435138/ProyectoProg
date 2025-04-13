@@ -1,8 +1,8 @@
-package es.uji.al435138.lectura.recommender;
+package es.uji.al435138.recommender;
 
-import es.uji.al435138.lectura.machinelearning.Algorithm;
-import es.uji.al435138.lectura.machinelearning.InvalidClusterNumberException;
-import es.uji.al435138.lectura.table.Table;
+import es.uji.al435138.machinelearning.Algorithm;
+import es.uji.al435138.machinelearning.InvalidClusterNumberException;
+import es.uji.al435138.table.Table;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,7 +1,7 @@
-package es.uji.al435138.lectura.machinelearning;
+package es.uji.al435138.machinelearning;
 
-import es.uji.al435138.lectura.table.Row;
-import es.uji.al435138.lectura.table.Table;
+import es.uji.al435138.table.Row;
+import es.uji.al435138.table.Table;
 
 import java.util.ArrayList;
 import java.util.List;

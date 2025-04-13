@@ -3,9 +3,9 @@ package Pruebas;
 
 // TODO: Pon los imports especificos a tu proyecto
 
-import es.uji.al435138.lectura.machinelearning.*;
-import es.uji.al435138.lectura.recommender.LikedItemNotFoundException;
-import es.uji.al435138.lectura.recommender.RecSys;
+import es.uji.al435138.machinelearning.*;
+import es.uji.al435138.recommender.LikedItemNotFoundException;
+import es.uji.al435138.recommender.RecSys;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
-import es.uji.al435138.lectura.csv.CSV;
-import es.uji.al435138.lectura.table.Table;
+import es.uji.al435138.csv.CSV;
+import es.uji.al435138.table.Table;
 
 
 class RecSysTest {

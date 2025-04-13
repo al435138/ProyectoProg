@@ -1,16 +1,13 @@
-package es.uji.al435138.lectura.recommender;
+package es.uji.al435138.recommender;
 
-import es.uji.al435138.lectura.machinelearning.Algorithm;
-import es.uji.al435138.lectura.machinelearning.KNN;
-import es.uji.al435138.lectura.machinelearning.KMeans;
-import es.uji.al435138.lectura.csv.CSV;
-import es.uji.al435138.lectura.table.Table;
-import es.uji.al435138.lectura.recommender.RecSys;
-import es.uji.al435138.lectura.machinelearning.EuclideanDistance;
+import es.uji.al435138.machinelearning.Algorithm;
+import es.uji.al435138.machinelearning.KNN;
+import es.uji.al435138.machinelearning.KMeans;
+import es.uji.al435138.csv.CSV;
+import es.uji.al435138.table.Table;
+import es.uji.al435138.machinelearning.EuclideanDistance;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;

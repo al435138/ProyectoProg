@@ -1,4 +1,4 @@
-package es.uji.al435138.lectura.table;
+package es.uji.al435138.table;
 
 import java.util.ArrayList;
 import java.util.List;

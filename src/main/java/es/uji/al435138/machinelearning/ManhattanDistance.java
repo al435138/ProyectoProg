@@ -1,4 +1,4 @@
-package es.uji.al435138.lectura.machinelearning;
+package es.uji.al435138.machinelearning;
 
 import java.util.List;
 
