@@ -35,6 +35,7 @@ class KMeansTest {
     // TODO: En caso de manejar la excepción IOException en CSV, puedes eliminarla aquí
     void setUp() throws IOException, URISyntaxException, InvalidClusterNumberException {
         iris = new CSV().readTableWithLabels("iris.csv");
+        distance = new EuclideanDistance();
         kMeans = new KMeans(irisClusters, numIterations, seed, distance);
         kMeans.train(iris);
     }

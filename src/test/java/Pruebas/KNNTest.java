@@ -4,6 +4,7 @@ package Pruebas;
 // TODO: Reemplazar por los imports de tu proyecto
 import es.uji.al435138.lectura.csv.CSV;
 import es.uji.al435138.lectura.machinelearning.Distance;
+import es.uji.al435138.lectura.machinelearning.EuclideanDistance;
 import es.uji.al435138.lectura.machinelearning.KNN;
 import es.uji.al435138.lectura.table.TableWithLabels;
 
@@ -29,6 +30,7 @@ class KNNTest {
     @BeforeEach
     void setUp() throws IOException, URISyntaxException {
         TableWithLabels iris = new CSV().readTableWithLabels("iris.csv");
+        distance = new EuclideanDistance();
         knn = new KNN(distance);
         knn.train(iris);
     }

@@ -6,6 +6,7 @@ import es.uji.al435138.lectura.machinelearning.KMeans;
 import es.uji.al435138.lectura.csv.CSV;
 import es.uji.al435138.lectura.table.Table;
 import es.uji.al435138.lectura.recommender.RecSys;
+import es.uji.al435138.lectura.machinelearning.EuclideanDistance;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,8 +31,11 @@ class SongRecSys {
 
         // Algorithms
         Map<String, Algorithm> algorithms = new HashMap<>();
-        algorithms.put("knn",new KNN());
-        algorithms.put("kmeans",new KMeans(15, 200, 4321));
+        if (method.equals("knn")) {
+            algorithms.put("knn", new KNN(new EuclideanDistance()));
+        } else if (method.equals("kmeans")) {
+            algorithms.put("kmeans", new KMeans(15, 200, 4321, new EuclideanDistance()));
+        }
 
         // Tables
         Map<String, Table> tables = new HashMap<>();

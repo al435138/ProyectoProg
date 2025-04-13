@@ -54,7 +54,7 @@ class RecSysTest {
             testTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_test.csv");
             testItemNames = readNames(songsFolder + separator + "songs_test_names.csv");
 
-            algorithm = new KNN();
+            algorithm = new KNN(new EuclideanDistance());
             recSys = new RecSys(algorithm);
             recSys.train(trainTable);
             recSys.initialise(testTable, testItemNames);
@@ -91,6 +91,7 @@ class RecSysTest {
         private int numClusters = 15;
         private int numIterations = 10;
         private long seed = 53;
+        private Distance distance = new EuclideanDistance();
 
         @BeforeEach
         // TODO: añadir o eliminar excepciones según tu implementación
@@ -99,7 +100,7 @@ class RecSysTest {
             testTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_test_withoutnames.csv");
             testItemNames = readNames(songsFolder + separator + "songs_test_names.csv");
 
-            algorithm = new KMeans(numClusters, numIterations, seed);
+            algorithm = new KMeans(numClusters, numIterations, seed, distance);
             recSys = new RecSys(algorithm);
             recSys.train(trainTable);
             recSys.initialise(testTable, testItemNames);
