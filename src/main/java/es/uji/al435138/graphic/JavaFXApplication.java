@@ -1,9 +1,12 @@
 package es.uji.al435138.graphic;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -50,6 +53,12 @@ public class JavaFXApplication extends Application {
         Button button = new Button("Genera una canción :D", imageView); // Un botón, no hace nada
         button.setFont(font5);
 
+        ObservableList<String> recomendacion = FXCollections.observableArrayList("Género", "Similitudes");
+        ComboBox<String> combo = new ComboBox<>(recomendacion);
+
+        ObservableList<String> distancia = FXCollections.observableArrayList("Euclidean", "Manhattan");
+        ComboBox<String> combo1 = new ComboBox<>(distancia);
+
         CheckBox checkBox1 = new CheckBox("Recomendar por géneros");
         HBox hbox1 = new HBox(checkBox1);
         CheckBox checkBox2 = new CheckBox("Recomendar por canciones");
@@ -59,7 +68,7 @@ public class JavaFXApplication extends Application {
         label2.setFont(font6);
 
 
-        layout.getChildren().addAll(label, button, hbox1, hbox2, label2); // Añade elementos al contenedor
+        layout.getChildren().addAll(combo, label, button, hbox1, hbox2, label2); // Añade elementos al contenedor
         layout.setAlignment(Pos.CENTER); // Centra los elementos
 
         button.setOnAction(actionEvent -> {
