@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
 
-class SongRecSys {
+public class SongRecSys {
     private RecSys recsys;
 
-    SongRecSys(String method) throws Exception, LikedItemNotFoundException {
+    public SongRecSys(String method) throws Exception, LikedItemNotFoundException {
         String sep = System.getProperty("file.separator");
         String ruta = "recommender";
 
@@ -77,6 +77,14 @@ class SongRecSys {
         {
             System.out.println("\t * "+name);
         }
+    }
+
+    public List<String> getAllNames() {
+        return this.recsys.getItemNames();
+    }
+
+    public List<String> recomendar(String likedName, int cantidad) throws LikedItemNotFoundException {
+        return this.recsys.recommend(likedName, cantidad);
     }
 
     public static void main(String[] args) throws Exception, LikedItemNotFoundException {

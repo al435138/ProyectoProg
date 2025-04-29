@@ -65,4 +65,8 @@ public class RecSys <T extends Table, U, V>{
 
     }
 
+    public List<String> getItemNames() {
+        return new ArrayList<>(estimatedLabels.keySet());
+    }
+
 }
