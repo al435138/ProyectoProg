@@ -1,11 +1,8 @@
 package es.uji.al435138.recommender;
 
-import es.uji.al435138.machinelearning.Algorithm;
-import es.uji.al435138.machinelearning.KNN;
-import es.uji.al435138.machinelearning.KMeans;
+import es.uji.al435138.machinelearning.*;
 import es.uji.al435138.csv.CSV;
 import es.uji.al435138.table.Table;
-import es.uji.al435138.machinelearning.EuclideanDistance;
 
 import java.io.File;
 import java.io.IOException;
