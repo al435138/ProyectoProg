@@ -44,13 +44,13 @@ public class ImplementacionModelo implements Modelo {
         CSVLabeledFileReader reader = new CSVLabeledFileReader(songsFolder + separator + "songs_train_names.txt");
         TableWithLabels tabla = (TableWithLabels) reader.readTableFromSource();
 
-        Algorithm algoritmo = null;
+        Algorithm algorithm = null;
         if (algoritmo.equals("knn")) {
-            algoritmo = new KNN(construirDistancia(distancia));
+            algorithm = new KNN(construirDistancia(distancia));
         } else {
-            algoritmo = new KMeans(15, 200, 4321, construirDistancia(distancia));
+            algorithm = new KMeans(15, 200, 4321, construirDistancia(distancia));
         }
-        RecSys recsys = new RecSys(algoritmo);
+        RecSys recsys = new RecSys(algorithm);
 
 
         // Generar recomendaciones

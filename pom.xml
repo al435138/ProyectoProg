@@ -48,7 +48,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <executable>${java.home}/bin/java</executable>
-                    <mainClass>es.uji.al435138.recommender.vista.ImplementacionVista</mainClass>
+                    <mainClass>es.uji.al435138.recommender.vista.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

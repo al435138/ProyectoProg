@@ -44,7 +44,11 @@ public class ImplementacionVista implements Vista {
         creaGUIIzquierda();
         izqda.setAlignment(Pos.TOP_LEFT);
 
-        creaGUICentro();
+        try {
+            creaGUICentro();
+        } catch (LikedItemNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         centro.setAlignment(Pos.TOP_CENTER);
 
         creaGUIDerecha();
@@ -66,7 +70,13 @@ public class ImplementacionVista implements Vista {
 
         btnRecomendar = new Button("Recomendar");
         btnRecomendar.setDisable(true);
-        btnRecomendar.setOnAction(e -> controlador.EnventoGenerarRecomendaciones());
+        btnRecomendar.setOnAction(e -> {
+            try {
+                controlador.EventoGenerarRecomendaciones();
+            } catch (LikedItemNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         izqda = new VBox(10, l1, cbRecomendacion, l2, cbDistancia, l3, numRecs, btnRecomendar);
     }
@@ -98,7 +108,7 @@ public class ImplementacionVista implements Vista {
         boolean ok = listaCanciones.getSelectionModel().getSelectedItem() != null
                 && cbRecomendacion.getValue() != null
                 && cbDistancia.getValue() != null
-                && numRecs.getText().matches();
+                && numRecs.getText().matches("\\d+");
         btnRecomendar.setDisable(!ok);
         habilitarBoton(ok);
     }
