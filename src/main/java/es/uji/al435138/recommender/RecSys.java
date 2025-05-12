@@ -30,20 +30,18 @@ public class RecSys <T extends Table, U, V>{
 
     }
 
-    public void initialise(Table testData, List<String> testItemNames){
-
+    public void initialise(Table testData, List<String> testItemNames) {
         this.testData = testData;
         this.testItemNames = testItemNames;
         this.estimatedLabels.clear();
 
-        for (int i = 0; i < testItemNames.size(); i++){
+        // Validar que los tamaños coincidan
 
+        for (int i = 0; i < testItemNames.size(); i++) {
             U sample = (U) testData.getRowAt(i).getData();
             V label = algorithm.estimate(sample);
             estimatedLabels.put(testItemNames.get(i), label);
-
         }
-
     }
 
     public List<String> recommend(String nameLikedItem, int numRecommendations) throws LikedItemNotFoundException {

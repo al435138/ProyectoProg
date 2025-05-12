@@ -27,10 +27,17 @@ public class ImplementacionControlador implements Controlador {
         int numRecs = vista.getNumRecomendaciones();
 
         try {
+            // Generar recomendaciones utilizando el modelo
             List<String> recomendaciones = modelo.generarRecomendaciones(algoritmo, distancia, cancionBase, numRecs);
             vista.mostrarRecomendaciones(recomendaciones);
+        } catch (LikedItemNotFoundException e) {
+            System.out.println("La canción seleccionada no se encuentra en los datos: " + cancionBase);
+            throw e;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Parámetro inválido: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Error al generar recomendaciones");
+            System.out.println("Error inesperado al generar recomendaciones: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
