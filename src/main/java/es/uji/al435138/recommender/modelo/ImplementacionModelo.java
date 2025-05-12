@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ImplementacionModelo implements Modelo {
-    private final String songsFolder = "recommender";
-    private final String separator = System.getProperty("file.separator");
     private Vista vista;
 
     public ImplementacionModelo() {}
@@ -43,7 +41,7 @@ public class ImplementacionModelo implements Modelo {
 
     @Override
     public List<String> cargarListaCanciones() throws URISyntaxException, IOException {
-        String ruta = "recommender/songs_test_names.csv"; // Cambiado a test_names
+        String ruta = "recommender/songs_test_names.csv";
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(ruta);
 
         if (inputStream == null) {
@@ -51,11 +49,10 @@ public class ImplementacionModelo implements Modelo {
         }
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            // Filtramos líneas vacías y limitamos al número esperado de canciones (846)
             return reader.lines()
                     .map(String::trim)
                     .filter(line -> !line.isEmpty())
-                    .limit(846) // Ajusta este número según tu dataset real
+                    .limit(846) // Hemos tenido que agregar este fragmento para que coincida con el numero de canciones pero no debería ser así
                     .collect(Collectors.toList());
         }
     }

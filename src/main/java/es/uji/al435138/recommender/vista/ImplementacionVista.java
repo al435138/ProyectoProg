@@ -140,6 +140,7 @@ public class ImplementacionVista implements Vista {
 
         cbRecomendacion = new ComboBox<>(FXCollections.observableArrayList("Género", "Similitudes"));
         cbRecomendacion.setStyle("-fx-background-color: #404040; -fx-text-fill: white; -fx-font-weight: bold; -fx-mark-color: #606060;");
+        cbRecomendacion.valueProperty().addListener((observable, oldValue, newValue) -> updateBoton()); // Llamar a updateBoton()
 
         // ComboBox "Distancia"
         Label lDistancia = new Label("Distancia:");
@@ -148,6 +149,8 @@ public class ImplementacionVista implements Vista {
 
         cbDistancia = new ComboBox<>(FXCollections.observableArrayList("Euclidea", "Manhattan"));
         cbDistancia.setStyle("-fx-background-color: #404040; -fx-text-fill: white; -fx-font-weight: bold; -fx-mark-color: #606060;");
+        cbDistancia.valueProperty().addListener((observable, oldValue, newValue) -> updateBoton()); // Llamar a updateBoton()
+
 
         panelCentral.getChildren().addAll(titulo, listaCanciones, lRecomendacion, cbRecomendacion, lDistancia, cbDistancia);
         return panelCentral;
