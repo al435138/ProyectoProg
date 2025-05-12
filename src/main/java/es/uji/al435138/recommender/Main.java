@@ -24,7 +24,6 @@ public class Main extends Application {
         controlador.setVista(vista);
 
         // Establecer el controlador en la vista
-        modelo.setVista(vista);
         vista.setModelo(modelo);
         vista.setControlador(controlador);
         vista.creaGUI();

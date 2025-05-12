@@ -1,7 +1,6 @@
 package es.uji.al435138.recommender.modelo;
 
 import es.uji.al435138.csv.CSV;
-import es.uji.al435138.csv.CSVLabeledFileReader;
 import es.uji.al435138.machinelearning.*;
 import es.uji.al435138.recommender.LikedItemNotFoundException;
 import es.uji.al435138.recommender.RecSys;
@@ -18,14 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ImplementacionModelo implements Modelo {
-    private Vista vista;
-
     public ImplementacionModelo() {}
 
-    @Override
-    public void setVista(Vista vista) {
-        this.vista = vista;
-    }
 
     private Distance construirDistancia(String distancia) {
         return switch (distancia.toLowerCase()) {

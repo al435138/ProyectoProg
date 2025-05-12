@@ -10,5 +10,4 @@ import java.util.List;
 public interface Modelo {
     List<String> cargarListaCanciones() throws IOException, URISyntaxException;
     List<String> generarRecomendaciones(String algoritmo, String distancia, String cancionBase, int numRecs) throws Exception, LikedItemNotFoundException;
-    void setVista(Vista vista);
 }
