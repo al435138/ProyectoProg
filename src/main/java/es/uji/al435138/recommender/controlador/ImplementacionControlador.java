@@ -20,59 +20,17 @@ public class ImplementacionControlador implements Controlador {
         this.vista = vista;
     }
 
-    @Override
-    public void metodoSeleccionadoCambiado(String metodo) throws LikedItemNotFoundException {
+    public void EventoGenerarRecomendaciones() throws LikedItemNotFoundException {
+        String algoritmo = vista.getAlgoritmo();
+        String distancia = vista.getDistancia();
+        String cancionBase = vista.getCancionSeleccionada();
+        int numRecs = vista.getNumRecomendaciones();
+
         try {
-            modelo.setMetodoSeleccionado(metodo); // <--- añadido
-            modelo.inicializarSistema(metodo.toLowerCase());
-            vista.mostrarCanciones(modelo.obtenerTodasCanciones());
-        } catch (Exception e) {
-            vista.mostrarError("Error al cargar datos: " + e.getMessage());
-        }
-    }
-
-    @Override
-    public void distanciaSeleccionadaCambiada(String distancia) {
-        modelo.setDistanciaSeleccionada(distancia);
-    }
-
-    @Override
-    public void cancionSeleccionadaCambiada() {
-        String seleccion = vista.getCancionSeleccionada();
-        if (seleccion != null) {
-            modelo.setCancionSeleccionada(seleccion);
-        }
-    }
-
-    @Override
-    public void setNumRecomendaciones(int num) {
-        modelo.setNumRecomendaciones(num);
-    }
-
-    @Override
-    public void generarRecomendaciones() {
-        try {
-            // Verificar que hay una canción seleccionada
-            if(modelo.getCancionSeleccionada() == null || modelo.getCancionSeleccionada().isEmpty()) {
-                vista.mostrarError("No se ha seleccionado ninguna canción");
-                return;
-            }
-
-            // Obtener número de recomendaciones
-            int numRec = modelo.getNumRecomendaciones();
-            if(numRec <= 0) {
-                vista.mostrarError("Número de recomendaciones no válido");
-                return;
-            }
-
-            // Generar recomendaciones
-            List<String> recomendaciones = modelo.obtenerRecomendaciones();
+            List<String> recomendaciones = modelo.generarRecomendaciones(algoritmo, distancia, cancionBase, numRecs);
             vista.mostrarRecomendaciones(recomendaciones);
-
         } catch (Exception e) {
-            vista.mostrarError("Error al generar recomendaciones: " + e.getMessage());
-        } catch (LikedItemNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al generar recomendaciones");
         }
     }
 }
