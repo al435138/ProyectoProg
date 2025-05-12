@@ -43,7 +43,7 @@ public class ImplementacionModelo implements Modelo {
 
     @Override
     public List<String> cargarListaCanciones() throws URISyntaxException, IOException {
-        String ruta = "recommender/songs_train_names.csv";
+        String ruta = "recommender/songs_test_names.csv"; // Cambiado a test_names
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(ruta);
 
         if (inputStream == null) {
@@ -51,52 +51,50 @@ public class ImplementacionModelo implements Modelo {
         }
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            return reader.lines().map(String::trim).collect(Collectors.toList());
+            // Filtramos líneas vacías y limitamos al número esperado de canciones (846)
+            return reader.lines()
+                    .map(String::trim)
+                    .filter(line -> !line.isEmpty())
+                    .limit(846) // Ajusta este número según tu dataset real
+                    .collect(Collectors.toList());
         }
     }
 
     @Override
-    public List<String> generarRecomendaciones(String algoritmo, String distancia, String cancionBase, int numRecs) throws Exception, LikedItemNotFoundException {
-        String sep = System.getProperty("file.separator");
-        String ruta = "recommender";
+    public List<String> generarRecomendaciones(String algoritmo, String distancia, String cancionBase, int numRecs)
+            throws Exception, LikedItemNotFoundException {
 
-        // Mapear archivos según el algoritmo
-        Map<String, String> archivosTrain = Map.of(
-                "knn", ruta + sep + "songs_train.csv",
-                "kmeans", ruta + sep + "songs_train_withoutnames.csv"
-        );
-        Map<String, String> archivosTest = Map.of(
-                "knn", ruta + sep + "songs_test.csv",
-                "kmeans", ruta + sep + "songs_test_withoutnames.csv"
-        );
+        Distance distanciaObj = construirDistancia(distancia);
 
-        // Seleccionar el algoritmo
-        Distance distanciaSeleccionada = construirDistancia(distancia);
-        Algorithm<?, List<Double>, Integer> algoritmoSeleccionado = switch (algoritmo.toLowerCase()) {
-            case "knn" -> new KNN(distanciaSeleccionada);
-            case "kmeans" -> new KMeans(15, 200, 4321, distanciaSeleccionada);
-            default -> throw new IllegalArgumentException("Algoritmo no soportado: " + algoritmo);
-        };
-
-        // Leer los datos de entrenamiento y prueba
-        CSV csv = new CSV();
-        Table trainData = csv.readTableWithLabels(archivosTrain.get(algoritmo.toLowerCase()));
-        Table testData = csv.readTableWithLabels(archivosTest.get(algoritmo.toLowerCase()));
-
-        // Leer los nombres de las canciones de prueba
-        List<String> testNames = cargarListaCanciones();
-
-        // Validar que los tamaños coincidan
-        if (testNames.size() != testData.getRowCount()) {
-            throw new IllegalArgumentException("El número de nombres de canciones no coincide con el número de filas en los datos de prueba.");
+        Algorithm algorithm;
+        if (algoritmo.equalsIgnoreCase("knn")) {
+            algorithm = new KNN(distanciaObj);
+        } else if (algoritmo.equalsIgnoreCase("kmeans")) {
+            algorithm = new KMeans(15, 200, 4321, distanciaObj);
+        } else {
+            throw new IllegalArgumentException("Algoritmo no soportado: " + algoritmo);
         }
 
-        // Inicializar y entrenar el sistema de recomendación
-        RecSys<Table, List<Double>, Integer> recSys = new RecSys<>(algoritmoSeleccionado);
-        recSys.train(trainData);
-        recSys.initialise(testData, testNames);
+        RecSys<Table, List<Double>, Integer> recSys = new RecSys<>(algorithm);
 
-        // Generar recomendaciones
+        String ruta = "recommender";
+        String sep = System.getProperty("file.separator");
+
+        String trainPath = ruta + sep + "songs_train.csv";
+        String testPath = ruta + sep + "songs_test.csv";
+
+        CSV csv = new CSV();
+        TableWithLabels trainData = csv.readTableWithLabels(trainPath);
+        TableWithLabels testData = csv.readTableWithLabels(testPath);
+        List<String> testItemNames = cargarListaCanciones();
+
+        if (testData.getRowCount() != testItemNames.size()) {
+            throw new IllegalStateException("El número de filas en testData (" + testData.getRowCount() +
+                    ") no coincide con el número de nombres (" + testItemNames.size() + ")");
+        }
+
+        recSys.train(trainData);
+        recSys.initialise(testData, testItemNames);
         return recSys.recommend(cancionBase, numRecs);
     }
 }

@@ -46,26 +46,40 @@ public class ImplementacionVista implements Vista {
         HBox tituloSuperior = new HBox();
         tituloSuperior.setStyle("-fx-padding: 20; -fx-alignment: center;");
         Label tituloPrincipal = new Label("Algoritmos que entienden tu ritmo.");
-        tituloPrincipal.setFont(new Font("Impact", 30)); // Fuente llamativa y tamaño grande
+        tituloPrincipal.setFont(new Font("Impact", 30));
         tituloPrincipal.setStyle("-fx-font-weight: bold; -fx-text-fill: white;");
         tituloSuperior.getChildren().add(tituloPrincipal);
 
-        // Panel central
+        // Panel central y derecho en un HBox
         VBox panelCentral = null;
         try {
             panelCentral = crearPanelCentral();
         } catch (LikedItemNotFoundException e) {
             throw new RuntimeException(e);
         }
-        root.setCenter(panelCentral);
-
-        // Panel derecho
         VBox panelDerecho = crearPanelDerecho();
-        root.setRight(panelDerecho);
+
+        HBox contenedorListas = new HBox(panelCentral, panelDerecho);
+        HBox.setHgrow(panelCentral, Priority.ALWAYS);
+        HBox.setHgrow(panelDerecho, Priority.ALWAYS);
+        panelCentral.setPrefWidth(600); // Ajusta el ancho inicial
+        panelDerecho.setPrefWidth(600); // Ajusta el ancho inicial
+
+        root.setTop(tituloSuperior);
+        root.setCenter(contenedorListas);
 
         // Estilo general
         root.setStyle("-fx-background-color: #121212;");
-        root.setTop(tituloSuperior); // Añadir el título en la parte superior
+
+        // Pie de página
+        HBox pieDePagina = new HBox();
+        pieDePagina.setStyle("-fx-padding: 10; -fx-alignment: center;");
+        Label marca = new Label("Programación Avanzada 2025");
+        marca.setFont(new Font("Roboto", 12));
+        marca.setStyle("-fx-text-fill: white;");
+        pieDePagina.getChildren().add(marca);
+
+        root.setBottom(pieDePagina);
 
         Scene escena = new Scene(root, 1200, 700);
         stage.setScene(escena);
@@ -74,11 +88,11 @@ public class ImplementacionVista implements Vista {
 
     private VBox crearPanelCentral() throws LikedItemNotFoundException, Exception {
         VBox panelCentral = new VBox(20);
-        panelCentral.setStyle("-fx-padding: 20; -fx-alignment: center;");
+        panelCentral.setStyle("-fx-padding: 20; -fx-alignment: top-left;"); // Alineación a la izquierda
 
         // Título "Canciones disponibles"
         Label titulo = new Label("Canciones disponibles");
-        titulo.setFont(new Font("Arial", 20)); // Tamaño de fuente aumentado
+        titulo.setFont(new Font("Roboto", 20)); // Cambiado a Roboto
         titulo.setStyle("-fx-font-weight: bold; -fx-translate-y: -10;"); // Negrita y desplazamiento vertical
         titulo.setTextFill(Color.WHITE);
 
@@ -86,7 +100,7 @@ public class ImplementacionVista implements Vista {
         listaCanciones = new ListView<>(FXCollections.observableArrayList(canciones));
         listaCanciones.setStyle("-fx-background-color: #282828; -fx-text-fill: white;");
 
-// Alternar colores de fondo
+        // Alternar colores de fondo
         listaCanciones.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -109,6 +123,16 @@ public class ImplementacionVista implements Vista {
 
         listaCanciones.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateBoton());
 
+        listaCanciones.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // Detectar doble clic
+                try {
+                    controlador.EventoGenerarRecomendaciones();
+                } catch (LikedItemNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         // ComboBox "Recomendación"
         Label lRecomendacion = new Label("Recomendación:");
         lRecomendacion.setTextFill(Color.WHITE);
@@ -116,6 +140,7 @@ public class ImplementacionVista implements Vista {
 
         cbRecomendacion = new ComboBox<>(FXCollections.observableArrayList("Género", "Similitudes"));
         cbRecomendacion.setStyle("-fx-background-color: #404040; -fx-text-fill: white; -fx-font-weight: bold; -fx-mark-color: #606060;");
+
         // ComboBox "Distancia"
         Label lDistancia = new Label("Distancia:");
         lDistancia.setTextFill(Color.WHITE);
@@ -133,17 +158,46 @@ public class ImplementacionVista implements Vista {
         panelDerecho.setStyle("-fx-padding: 20;");
 
         Label titulo = new Label("Recomendaciones");
-        titulo.setFont(new Font("Arial", 18));
+        titulo.setFont(new Font("Arial", 20)); // Tamaño de fuente aumentado
+        titulo.setStyle("-fx-font-weight: bold; -fx-translate-y: -10;"); // Negrita y desplazamiento vertical
         titulo.setTextFill(Color.WHITE);
+
+        // Label para mostrar la canción base seleccionada
+        Label lCancionBase = new Label("Canción base: Ninguna seleccionada");
+        lCancionBase.setTextFill(Color.WHITE);
+        lCancionBase.setStyle("-fx-font-weight: bold; -fx-font-family: 'Roboto';");
+
+        // Actualizar el texto del Label cuando se selecciona una canción
+        listaCanciones.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                lCancionBase.setText("Canción base: " + newValue);
+            } else {
+                lCancionBase.setText("Canción base: Ninguna seleccionada");
+            }
+        });
 
         listaRecomendaciones = new ListView<>();
         listaRecomendaciones.setStyle("-fx-background-color: #282828; -fx-text-fill: white;");
+        listaRecomendaciones.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                    setStyle("-fx-background-color: #404040;"); // Fondo gris para celdas vacías
+                } else {
+                    setText(item);
+                    setStyle("-fx-background-color: #404040; -fx-text-fill: white; -fx-font-family: 'Verdana'; -fx-font-weight: bold;");
+                }
+            }
+        });
 
         Label lNumRecs = new Label("Número de recomendaciones:");
         lNumRecs.setTextFill(Color.WHITE);
+        lNumRecs.setStyle("-fx-font-weight: bold; -fx-font-family: 'Roboto';");
 
         numRecs = new TextField("5");
-        numRecs.setStyle("-fx-background-color: #404040; -fx-text-fill: white;");
+        numRecs.setStyle("-fx-background-color: #404040; -fx-text-fill: white; -fx-font-family: 'Roboto';");
         numRecs.setEditable(false); // Deshabilitar edición manual
 
         // Botones para ajustar el número de recomendaciones
@@ -184,7 +238,7 @@ public class ImplementacionVista implements Vista {
         HBox contenedorBoton = new HBox(btnRecomendar);
         contenedorBoton.setAlignment(Pos.CENTER); // Centrar el botón
 
-        panelDerecho.getChildren().addAll(titulo, listaRecomendaciones, lNumRecs, numRecs, botonesAjuste, contenedorBoton);
+        panelDerecho.getChildren().addAll(titulo, lCancionBase, listaRecomendaciones, lNumRecs, numRecs, botonesAjuste, contenedorBoton);
         return panelDerecho;
     }
 
